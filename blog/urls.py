@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index),
     path('blog/', views.blog),
+    path('post/', views.post),
 ]
 
 if settings.DEBUG:
