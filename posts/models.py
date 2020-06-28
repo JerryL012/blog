@@ -1,3 +1,28 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
-# Create your models here.
+User = get_user_model()
+class Author(models.Model):
+    profile_picture = models.ImageField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.user.username
+
+class Category(models.Model):
+    title = models.CharField(max_length=200)
+    def __str__(self):
+        return self.title
+
+# one post card
+class Post(models.Model):
+    title = models.CharField(max_length=100)
+    overview = models.TextField()
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    comment_count = models.IntegerField(default=0)
+    thumbnail = models.ImageField()
+
+    categories = models.ManyToManyField(Category)
+
+    def __str__(self):
+        return self.title
