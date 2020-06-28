@@ -1,1 +1,1 @@
-blog for project base
+project base  
