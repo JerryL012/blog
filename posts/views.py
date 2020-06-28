@@ -1,10 +1,18 @@
 from django.shortcuts import render
 from .models import Post
+from follow.models import Follow
 
 def index(request):
     # grab the post with true featured
     featured = Post.objects.filter(featured=True)
     latest = Post.objects.order_by('-timestamp')[0:3]
+
+    if request.method == "POST":
+        email = request.POST["email"]
+        new_follow = Follow()
+        new_follow.email = email
+        new_follow.save()
+
     context = {
         'object_list': featured,
         'latest': latest
