@@ -15,6 +15,7 @@ class Category(models.Model):
 
 # one post card
 class Post(models.Model):
+    categories = models.ManyToManyField(Category)
     title = models.CharField(max_length=100)
     overview = models.TextField()
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
@@ -22,7 +23,8 @@ class Post(models.Model):
     comment_count = models.IntegerField(default=0)
     thumbnail = models.ImageField()
 
-    categories = models.ManyToManyField(Category)
+    # if true, render it on the latest post on the page
+    featured = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
