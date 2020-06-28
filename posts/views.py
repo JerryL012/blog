@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Post
 from follow.models import Follow
+from django.contrib.auth.forms import AuthenticationForm
+
 
 def index(request):
     # grab the post with true featured
