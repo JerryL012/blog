@@ -21,6 +21,7 @@ class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     comment_count = models.IntegerField(default=0)
+    # image on the right
     thumbnail = models.ImageField()
 
     # if true, render it on the latest post on the page
