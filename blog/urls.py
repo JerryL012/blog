@@ -10,7 +10,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/', blog, name='post-list'),
     path('post/<id>/', post, name='post-detail'),
-    path('search/', search, name='search')
+    path('search/', search, name='search'),
 ]
 
 if settings.DEBUG:
