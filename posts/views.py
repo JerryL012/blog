@@ -3,7 +3,22 @@ from .models import Post
 from follow.models import Follow
 # all we need to paginate query sets
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Count
+from django.db.models import Count, Q
+
+def search(request):
+    queryset = Post.objects.all()
+    query = request.GET.get('q')
+    # match the post text
+    if query:
+        queryset = queryset.filter(
+            # title that contains the query
+            Q(title__icontains=query)|  # or
+            Q(overview__icontains=query)
+        ).distinct()  # if the same post, only get one
+    context = {
+        'queryset': queryset
+    }
+    return render(request, 'search_results.html', context)
 
 def get_category_count():
     # all the categories of posts. annotate returns a dict where each key is each category
