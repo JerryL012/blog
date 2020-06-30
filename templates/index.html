@@ -1,6 +1,13 @@
 {% extends "base.html"%}
 {% load static %}
 {% block content %}
+
+<style>
+  .post-thumbnail img{
+    width: 400px;
+    height: 200px;
+  }
+</style>
     <!-- Hero Section-->
     <section style="background: url({% static 'img/hero.jpg'%}); background-size: cover; background-position: center center" class="hero">
       <div class="container">
@@ -79,7 +86,11 @@
         <div class="row">
           {% for obj in latest %}
           <div class="post col-md-4">
-            <div class="post-thumbnail"><a href="#"><img src="{{obj.thumbnail.url}}" alt="..." class="img-fluid"></a></div>
+            <div class="post-thumbnail">
+              <a href="#">
+              <img src="{{obj.thumbnail.url}}" alt="..." class="img-fluid">
+              </a>
+            </div>
             <div class="post-details">
               <div class="post-meta d-flex justify-content-between">
                 <div class="date">{{obj.timestamp}}</div>

@@ -43,3 +43,17 @@ class Post(models.Model):
         return reverse('post-detail', kwargs={
             'id': self.id
         })
+    # get all the comments of this post
+    @property
+    def get_comments(self):
+        return self.comments.all().order_by('-timestamp')
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    content = models.TextField()
+    # if post deleted, then comment deleted
+    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
