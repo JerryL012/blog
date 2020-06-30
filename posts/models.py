@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+from tinymce import HTMLField
 
 User = get_user_model()
 class Author(models.Model):
@@ -25,6 +26,8 @@ class Post(models.Model):
     view_count = models.IntegerField(default=0)
     # image on the right
     thumbnail = models.ImageField()
+    # tinymce
+    content = HTMLField()
 
     # if true, render it on the latest post on the page
     featured = models.BooleanField(default=True)
