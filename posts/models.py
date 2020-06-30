@@ -32,6 +32,10 @@ class Post(models.Model):
     # if true, render it on the latest post on the page
     featured = models.BooleanField(default=True)
 
+    # previous post and next post
+    previous_post = models.ForeignKey('self', related_name='previous', on_delete=models.SET_NULL, blank=True, null=True)
+    next_post = models.ForeignKey('self', related_name='next', on_delete=models.SET_NULL, blank=True, null=True)
+
     def __str__(self):
         return self.title
 
