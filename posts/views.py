@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post
 from follow.models import Follow
 # all we need to paginate query sets
@@ -71,4 +71,8 @@ def blog(request):
     return render(request, 'blog.html', context)
 
 def post(request, id):
-    return render(request, 'post.html', {})
+    post = get_object_or_404(Post, id=id)
+    context = {
+        'post': post
+    }
+    return render(request, 'post.html', context)
