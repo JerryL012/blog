@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from posts.views import index, blog, post, search
+from users import views as user_views
 
 urlpatterns = [
     path('', index, name='blog-home'),
@@ -12,6 +13,7 @@ urlpatterns = [
     path('post/<id>/', post, name='post-detail'),
     path('search/', search, name='search'),
     path('tinymce/', include('tinymce.urls')),
+    path('register/', user_views.register, name='register'),
 ]
 
 if settings.DEBUG:
