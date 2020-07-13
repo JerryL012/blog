@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     'follow',
     'tinymce',
     "users",
+    "crispy_forms",
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,5 @@ TINYMCE_DEFAULT_CONFIG = {
     'menubar':True,
     'statusbar':True,
 }
+# CSS. default is bootstrap2 which is too old.
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
