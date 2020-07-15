@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from .forms import UserRegisterForm
+from django.contrib.auth.decorators import login_required
 
 def register(request):
     if request.method == 'POST':
@@ -10,7 +11,7 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, f'Welcome {username}! You are now able to login')
-            # redirect to home page
+            # redirect to login page
             return redirect('login')
     else:
         # empty form
@@ -19,3 +20,9 @@ def register(request):
         'form': form
     }
     return render(request, 'users/register.html', context)
+
+# user profile page only allowed user to modify after login
+@login_required
+def profile(request):
+
+    return render(request, 'users/profile.html')

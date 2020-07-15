@@ -154,3 +154,5 @@ TINYMCE_DEFAULT_CONFIG = {
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # if login successfully, redirect to home page
 LOGIN_REDIRECT_URL = 'blog-home'
+# redirect profile page to login page
+LOGIN_URL = 'login'
