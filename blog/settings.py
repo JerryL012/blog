@@ -152,3 +152,5 @@ TINYMCE_DEFAULT_CONFIG = {
 }
 # CSS. default is bootstrap2 which is too old.
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+# if login successfully, redirect to home page
+LOGIN_REDIRECT_URL = 'blog-home'
