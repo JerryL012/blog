@@ -58,5 +58,7 @@ class Comment(models.Model):
     # if post deleted, then comment deleted
     post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
 
+    # comment_user = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.user.username
