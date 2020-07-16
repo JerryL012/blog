@@ -5,11 +5,11 @@ from tinymce import HTMLField
 from users.models import Profile
 
 User = get_user_model()
-class Author(models.Model):
-    profile_picture = models.ImageField()
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    def __str__(self):
-        return self.user.username
+# class Author(models.Model):
+#     profile_picture = models.ImageField()
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     def __str__(self):
+#         return self.user.username
 
 class Category(models.Model):
     title = models.CharField(max_length=200)
@@ -52,7 +52,7 @@ class Post(models.Model):
         return self.comments.all().order_by('-timestamp')
 
 class Comment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
     # if post deleted, then comment deleted
