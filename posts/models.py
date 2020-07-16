@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
 from tinymce import HTMLField
+from users.models import Profile
 
 User = get_user_model()
 class Author(models.Model):
@@ -20,7 +21,9 @@ class Post(models.Model):
     categories = models.ManyToManyField(Category)
     title = models.CharField(max_length=100)
     overview = models.TextField()
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    # author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
     timestamp = models.DateTimeField(auto_now_add=True) # when it created
     comment_count = models.IntegerField(default=0)
     view_count = models.IntegerField(default=0)
