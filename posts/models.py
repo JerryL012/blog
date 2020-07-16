@@ -23,7 +23,6 @@ class Post(models.Model):
     overview = models.TextField()
     # author = models.ForeignKey(Author, on_delete=models.CASCADE)
     author = models.ForeignKey(Profile, on_delete=models.CASCADE)
-
     timestamp = models.DateTimeField(auto_now_add=True) # when it created
     comment_count = models.IntegerField(default=0)
     view_count = models.IntegerField(default=0)
