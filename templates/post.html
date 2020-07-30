@@ -32,11 +32,11 @@
                     <div class="views"><i class="icon-eye"></i>{{post.view_count}}</div>
                     <div class="comments meta-last"><i class="icon-comment"></i>{{post.comment_count}}</div>
                   </div>
-<!--                  &lt;!&ndash;update/delete&ndash;&gt;-->
-<!--                  &lt;!&ndash;{% if post.author == user %}&ndash;&gt;-->
-<!--                  <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.get_absolute_url %}">Update</a>-->
-<!--                  <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.get_absolute_url %}">Delete</a>-->
-<!--                  &lt;!&ndash;{% endif %}&ndash;&gt;-->
+                    <!--update/delete-->
+                  {% if post.author == user.profile %}
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="#">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="#">Delete</a>
+                  {% endif %}
                 </div>
                 <div class="post-body">
                   {{post.content | safe}}

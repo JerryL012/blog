@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 
-from posts.views import index, blog, post, search, contact, PostCreateView, PostUpdateView, PostDeleteView
+from posts.views import *
 from django.contrib.auth import views as auth_views
 from users import views as user_views
 from django.conf import settings
