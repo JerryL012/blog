@@ -34,8 +34,8 @@
                   </div>
                     <!--update/delete-->
                   {% if post.author == user.profile %}
-                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="#">Update</a>
-                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="#">Delete</a>
+                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id %}">Update</a>
+                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Delete</a>
                   {% endif %}
                 </div>
                 <div class="post-body">

@@ -114,6 +114,8 @@ class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Post
     template_name = 'post_form.html'
     fields = ['thumbnail', 'title', 'categories', 'overview', 'content']
+    slug_field = 'id'
+    slug_url_kwarg = 'id'
     # get the author of this post
     def form_valid(self, form):
         form.instance.author = self.request.user.profile
@@ -129,7 +131,9 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
     model = Post
     # if success, redirect to home page
     success_url = '/'
-
+    template_name = 'post_confirm_delete.html'
+    slug_field = 'id'
+    slug_url_kwarg = 'id'
     # check whether user is the author of the post?(maybe need some changes)
     def test_func(self):
         post = self.get_object()
