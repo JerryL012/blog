@@ -109,8 +109,6 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user.profile
         return super().form_valid(form)
 
-
-
 class PostUpdateView(LoginRequiredMixin, UpdateView):
     model = Post
     template_name = 'post_form.html'
