@@ -140,10 +140,3 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
         if self.request.user.profile == post.author:
             return True
         return False
-
-# class based view
-# class PostListView(ListView):
-#     model = Post
-#     template_name = 'index.html'
-#     context_object_name = 'latest'
-#     ordering = ['-timestamp']

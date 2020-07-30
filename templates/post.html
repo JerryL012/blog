@@ -69,13 +69,7 @@
                     <div class="comment-header d-flex justify-content-between">
                       <div class="user d-flex align-items-center">
                         <div class="image">
-<!--                          {% if comment.user %}-->
                           <img src="{{comment.user.profile.image.url}}" alt="..." class="img-fluid rounded-circle">
-<!--                          {% else %}-->
-<!--                          &lt;!&ndash; show default img of user  &ndash;&gt;-->
-<!--                          <img src="{% static 'img/user.svg'%}" alt="..." class="img-fluid rounded-circle"></div>-->
-<!--                          {% endif %}-->
-<!--                          <img src="{% static 'img/user.svg'%}" class="img-fluid rounded-circle" alt="...">-->
                         </div>
                         <div class="title"><strong>{{comment.user.username}}</strong><span class="date">{{comment.timestamp|timesince}} ago</span></div>
                       </div>
@@ -96,7 +90,6 @@
                     <div class="row">
                       <div class="form-group col-md-12">
                         {{form}}
-<!--                        <textarea name="usercomment" id="usercomment" placeholder="Type your comment" class="form-control"></textarea>-->
                       </div>
                       <div class="form-group col-md-12">
                         <button type="submit" class="btn btn-secondary">Submit Comment</button>
