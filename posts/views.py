@@ -5,6 +5,8 @@ from follow.models import Follow
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count, Q
 from .forms import CommentForm
+# operate post, class based view
+from django.views.generic import ListView
 
 def search(request):
     queryset = Post.objects.all()
@@ -29,7 +31,7 @@ def get_category_count():
 
 def index(request):
     # grab the post with true featured
-    featured = Post.objects.filter(featured=True)
+    featured = Post.objects.filter(featured=True)[0:3]
     latest = Post.objects.order_by('-timestamp')[0:3]
 
     if request.method == "POST":
@@ -95,3 +97,7 @@ def post(request, id):
 
 def contact(request):
     return render(request, 'contact.html')
+
+# class based view
+# class PostListView(ListView):
+#     model = Post
