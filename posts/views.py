@@ -6,7 +6,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count, Q
 from .forms import CommentForm
 # operate post, class based view
-from django.views.generic import ListView
+from django.views.generic import CreateView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def search(request):
     queryset = Post.objects.all()
@@ -99,8 +100,28 @@ def post(request, id):
 def contact(request):
     return render(request, 'contact.html')
 
+class PostCreateView(LoginRequiredMixin, CreateView):
+    model = Post
+    template_name = 'post_form.html'
+    fields = ['thumbnail', 'title', 'categories', 'overview', 'content']
+    # get the author of this post
+    def form_valid(self, form):
+        form.instance.author = self.request.user.profile
+        return super().form_valid(form)
+
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    model = Post
+    template_name = 'post_form.html'
+    fields = ['thumbnail', 'title', 'categories', 'overview', 'content']
+    # get the author of this post
+    def form_valid(self, form):
+        form.instance.author = self.request.user.profile
+        return super().form_valid(form)
+
+
 # class based view
 # class PostListView(ListView):
 #     model = Post
 #     template_name = 'index.html'
 #     context_object_name = 'latest'
+#     ordering = ['-timestamp']

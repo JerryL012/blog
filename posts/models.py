@@ -27,7 +27,7 @@ class Post(models.Model):
     comment_count = models.IntegerField(default=0)
     view_count = models.IntegerField(default=0)
     # image on the right
-    thumbnail = models.ImageField()
+    thumbnail = models.ImageField(default='default_thumbnail.jpeg')
     # tinymce
     content = HTMLField()
 
@@ -42,6 +42,7 @@ class Post(models.Model):
         return self.title
 
     def get_absolute_url(self):
+        # reverse can return a full path of url as string
         return reverse('post-detail', kwargs={
             'id': self.id
         })
