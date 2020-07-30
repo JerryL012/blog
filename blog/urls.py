@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 
-from posts.views import index, blog, post, search, contact, PostCreateView, PostUpdateView
+from posts.views import index, blog, post, search, contact, PostCreateView, PostUpdateView, PostDeleteView
 from django.contrib.auth import views as auth_views
 from users import views as user_views
 from django.conf import settings
@@ -16,6 +16,7 @@ urlpatterns = [
     path('blog/', blog, name='post-list'),
     path('post/<id>/', post, name='post-detail'),
     path('post/<id>/update/', PostUpdateView.as_view(), name='post-update'),
+    path('post/<id>/delete/', PostDeleteView.as_view(), name='post-delete'),
     path('blog/new/', PostCreateView.as_view(), name='post-create'),
     path('search/', search, name='search'),
     path('tinymce/', include('tinymce.urls')),

@@ -6,8 +6,8 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Count, Q
 from .forms import CommentForm
 # operate post, class based view
-from django.views.generic import CreateView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 def search(request):
     queryset = Post.objects.all()
@@ -103,13 +103,14 @@ def contact(request):
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'post_form.html'
+
     fields = ['thumbnail', 'title', 'categories', 'overview', 'content']
     # get the author of this post
     def form_valid(self, form):
         form.instance.author = self.request.user.profile
         return super().form_valid(form)
 
-class PostUpdateView(LoginRequiredMixin, UpdateView):
+class PostUpdateView(LoginRequiredMixin,UserPassesTestMixin, UpdateView):
     model = Post
     template_name = 'post_form.html'
     fields = ['thumbnail', 'title', 'categories', 'overview', 'content']
@@ -117,7 +118,24 @@ class PostUpdateView(LoginRequiredMixin, UpdateView):
     def form_valid(self, form):
         form.instance.author = self.request.user.profile
         return super().form_valid(form)
+    # check whether user is the author of the post?(maybe need some changes)
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
 
+class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin, DeleteView):
+    model = Post
+    # if success, redirect to home page
+    success_url = '/'
+
+    # check whether user is the author of the post?(maybe need some changes)
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
 
 # class based view
 # class PostListView(ListView):
