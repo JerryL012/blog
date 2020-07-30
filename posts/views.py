@@ -92,3 +92,6 @@ def post(request, id):
         'form': form
     }
     return render(request, 'post.html', context)
+
+def contact(request):
+    return render(request, 'contact.html')
