@@ -31,7 +31,8 @@ def get_category_count():
 
 def index(request):
     # grab the post with true featured
-    featured = Post.objects.filter(featured=True)[0:3]
+    featured = Post.objects.order_by('-timestamp')
+    featured = featured.filter(featured=True)[0:3]
     latest = Post.objects.order_by('-timestamp')[0:3]
 
     if request.method == "POST":
@@ -101,3 +102,5 @@ def contact(request):
 # class based view
 # class PostListView(ListView):
 #     model = Post
+#     template_name = 'index.html'
+#     context_object_name = 'latest'

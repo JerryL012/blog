@@ -6,9 +6,12 @@ from django.contrib.auth import views as auth_views
 from users import views as user_views
 from django.conf import settings
 from django.conf.urls.static import static
+# operate post
+
 
 urlpatterns = [
     path('', index, name='blog-home'),
+    # path('', PostListView.as_view(), name='blog-home'),
     path('admin/', admin.site.urls),
     path('blog/', blog, name='post-list'),
     path('post/<id>/', post, name='post-detail'),
