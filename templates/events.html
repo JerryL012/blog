@@ -36,11 +36,16 @@
             <nav aria-label="Page navigation example">
               <ul class="pagination pagination-template d-flex justify-content-center">
                 {% if queryset.has_previous %}
-                <li class="page-item"><a href="?{{page_request_var}}={{queryset.previous_page_number}}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                  <!-- last page, can go back to page 1-->
+                  <li class="page-item"><a href="?{{page_request_var}}=1"  class="btn btn-outline-info mb-4 page-link active"><strong>1</strong>...</a></li>
+                  <li class="page-item"><a href="?{{page_request_var}}={{queryset.previous_page_number}}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
                 {% endif %}
+
                 <li class="page-item"><a href="?{{page_request_var}}={{queryset.number}}" class="page-link active">{{queryset.number}}</a></li>
+
                 {% if queryset.has_next %}
-                <li class="page-item"><a href="?{{page_request_var}}={{queryset.next_page_number}}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                  <li class="page-item"><a href="?{{page_request_var}}={{queryset.next_page_number}}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                  <li class="page-item"><a href="?{{page_request_var}}={{queryset.paginator.num_pages}}"  class="btn btn-outline-info mb-4 page-link active">...<strong>{{queryset.paginator.num_pages}}</strong></a></li>
                 {% endif %}
               </ul>
             </nav>

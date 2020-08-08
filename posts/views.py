@@ -59,6 +59,7 @@ def events(request):
     page = request.GET.get(page_request_var)
     # check whether the page is empty or page parameter is wrong
     try:
+        # get the content of a specific page
         paginated_queryset = paginator.page(page)
     except PageNotAnInteger:
         # go to the page 1
