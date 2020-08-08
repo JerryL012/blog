@@ -11,9 +11,9 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     # path('', PostListView.as_view(), name='blog-home'),
-    path('', index, name='blog-home'),
+    path('', home, name='blog-home'),
     path('admin/', admin.site.urls),
-    path('blog/', blog, name='post-list'),
+    path('blog/', events, name='post-list'),
     path('post/<id>/', post, name='post-detail'),
     path('post/<id>/update/', PostUpdateView.as_view(), name='post-update'),
     path('post/<id>/delete/', PostDeleteView.as_view(), name='post-delete'),

@@ -30,7 +30,7 @@ def get_category_count():
     queryset = Post.objects.values('categories__title').annotate(Count('categories__title'))
     return queryset
 
-def index(request):
+def home(request):
     # grab the post with true featured
     featured = Post.objects.order_by('-timestamp')
     featured = featured.filter(featured=True)[0:3]
@@ -46,9 +46,9 @@ def index(request):
         'object_list': featured,
         'latest': latest
     }
-    return render(request, 'index.html', context)
+    return render(request, 'home.html', context)
 
-def blog(request):
+def events(request):
     category_count = get_category_count()
     most_recent = Post.objects.order_by('-timestamp')[:3]
     post_list = Post.objects.all()
@@ -73,7 +73,7 @@ def blog(request):
         'most_recent': most_recent,
         'category_count': category_count
     }
-    return render(request, 'blog.html', context)
+    return render(request, 'events.html', context)
 
 def post(request, id):
     category_count = get_category_count()
