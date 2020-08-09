@@ -8,6 +8,7 @@ from .forms import CommentForm
 # operate post, class based view
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 
 def search(request):
     queryset = Post.objects.all()
@@ -75,6 +76,35 @@ def events(request):
         'category_count': category_count
     }
     return render(request, 'events.html', context)
+
+# specific user
+def user_events(request, author_id):
+    category_count = get_category_count()
+    most_recent = Post.objects.order_by('-timestamp')[:3]
+    post_list = Post.objects.filter(author_id=author_id)
+    # how many it should hold in one page
+    paginator = Paginator(post_list, 4)
+    # page passed in the url, like ?page==1. page is the page number, 1234...
+    page_request_var = 'page'
+    page = request.GET.get(page_request_var)
+    # check whether the page is empty or page parameter is wrong
+    try:
+        # get the content of a specific page
+        paginated_queryset = paginator.page(page)
+    except PageNotAnInteger:
+        # go to the page 1
+        paginated_queryset = paginator.page(1)
+    except EmptyPage:
+        # return the num of pages. e.g 100 posts, per 4, so it should be 25 pages, the last page
+        paginated_queryset = paginator.page(paginator.num_pages)
+
+    context = {
+        'queryset': paginated_queryset,
+        'page_request_var': page_request_var,
+        'most_recent': most_recent,
+        'category_count': category_count
+    }
+    return render(request, 'users/user_posts.html', context)
 
 def post(request, id):
     category_count = get_category_count()

@@ -49,8 +49,7 @@
                 </header>
                 <p>{{obj.overview}}</p>
                 <footer class="post-footer d-flex align-items-center">
-                  <a href="#" class="author d-flex align-items-center flex-wrap">
-                    <!--obj.author.profile_picture.url, using the url of image-->
+                  <a href="{% url 'user-posts' obj.author_id %}" class="author d-flex align-items-center flex-wrap">
                     <div class="avatar rounded-circle"><img src="{{obj.author.image.url}}" alt="..." class="img-fluid"></div>
                     <div class="title"><span>{{obj.author}}</span></div>
                   </a>
