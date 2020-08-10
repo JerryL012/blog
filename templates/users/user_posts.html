@@ -1,6 +1,7 @@
 {% extends "base.html"%}
 {% load static %}
 {% block content %}
+    <h2>Total Posts: ({{queryset.paginator.count}})</h2>
     <div class="container">
       <div class="row">
         <!-- Latest Posts -->

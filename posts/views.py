@@ -9,6 +9,8 @@ from .forms import CommentForm
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+
 
 def search(request):
     queryset = Post.objects.all()
@@ -31,10 +33,11 @@ def get_category_count():
     queryset = Post.objects.values('categories__title').annotate(Count('categories__title'))
     return queryset
 
+@login_required
 def home(request):
     # grab the post with true featured
     featured = Post.objects.order_by('-timestamp')
-    featured = featured.filter(featured=True)[0:3]
+    featured = featured.filter(author=request.user.profile)[0:3]
     latest = Post.objects.order_by('-timestamp')[0:3]
 
     if request.method == "POST":
@@ -131,6 +134,7 @@ def post(request, id):
 def contact(request):
     return render(request, 'contact.html')
 
+# post a new Evnet
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
     template_name = 'post_form.html'

@@ -1,7 +1,7 @@
 {% extends "base.html"%}
 {% load static %}
 {% block content %}
-
+<!--Detail of one Post(including Update and Delete)-->
 <style>
   .post-body img{
     width: 100%;
@@ -32,11 +32,13 @@
                     <div class="views"><i class="icon-eye"></i>{{post.view_count}}</div>
                     <div class="comments meta-last"><i class="icon-comment"></i>{{post.comment_count}}</div>
                   </div>
+                  <div class="ml-2">
                     <!--update/delete-->
-                  {% if post.author == user.profile %}
-                    <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id %}">Update</a>
-                    <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Delete</a>
-                  {% endif %}
+                    {% if post.author == user.profile %}
+                      <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' post.id %}">Update</a>
+                      <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' post.id %}">Delete</a>
+                    {% endif %}
+                  </div>
                 </div>
                 <div class="post-body">
                   {{post.content | safe}}
