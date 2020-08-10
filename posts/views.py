@@ -37,7 +37,7 @@ def get_category_count():
 def home(request):
     # grab the post with true featured
     featured = Post.objects.order_by('-timestamp')
-    featured = featured.filter(author=request.user.profile)[0:3]
+    featured = featured.filter(author=request.user.profile)[0:4]
     latest = Post.objects.order_by('-timestamp')[0:3]
 
     if request.method == "POST":
