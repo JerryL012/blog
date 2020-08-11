@@ -156,3 +156,5 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 LOGIN_REDIRECT_URL = 'blog-home'
 # redirect profile page to login page
 LOGIN_URL = 'login'
+
+# set up gmail
