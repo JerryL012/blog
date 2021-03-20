@@ -4,7 +4,7 @@ certifi==2020.6.20
 Django @ file:///home/conda/feedstock_root/build_artifacts/django_1593616220789/work
 django-tinymce4-lite==1.7.5
 EasyTkinter==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 jsmin==2.2.2
 macholib==1.11
 MarkupSafe==1.1.1
